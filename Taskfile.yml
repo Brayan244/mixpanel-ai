@@ -1,0 +1,11 @@
+version: "3"
+
+tasks:
+  start:
+    desc: "Start the application"
+    cmds:
+      - python manage.py runserver
+  migrate:
+    desc: "Migrate the database"
+    cmds:
+      - python manage.py migrate
