@@ -16,7 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from mixpanel.event_records.views import create, index, show, update, delete
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("event_records/create/", create),
+    path("event_records/", index),
+    path("event_records/<int:event_record_id>/", show),
+    path("event_records/<int:event_record_id>/update/", update),
+    path("event_records/<int:event_record_id>/delete/", delete),
 ]

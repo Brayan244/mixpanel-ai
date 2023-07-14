@@ -1,0 +1,119 @@
+{
+  "info": {
+    "_postman_id": "c1b87275-2bfe-4d20-94d1-31b825b537f9",
+    "name": "Event Records API",
+    "description": "API endpoints for managing Event Records",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Event Record",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Sample Event\",\n  \"description\": \"Sample Event Description\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/event_records/create/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "event_records",
+            "create"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Event Records",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/event_records/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "event_records"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Single Event Record",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/event_records/1/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "event_records",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Event Record",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Updated Event\",\n  \"description\": \"Updated Event Description\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/event_records/1/update/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "event_records",
+            "1",
+            "update"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Event Record",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/event_records/1/delete/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "event_records",
+            "1",
+            "delete"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
