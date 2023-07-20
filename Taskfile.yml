@@ -9,3 +9,7 @@ tasks:
     desc: "Migrate the database"
     cmds:
       - python manage.py migrate
+  console:
+    desc: "Start the python console"
+    cmds:
+      - python manage.py shell
