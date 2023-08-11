@@ -2,6 +2,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import EventRecord
 import json
+import openai
+from pgvector.django import CosineDistance
 
 @csrf_exempt
 def create(request):
@@ -11,23 +13,36 @@ def create(request):
         return JsonResponse({'message': 'Invalid request method'}, status=405)
 
     data = json.loads(request.body)
-    event_record = EventRecord.objects.create(
-        name=data["name"],
+
+    event_record = EventRecord(
+        name=data["name"], 
         description=data["description"],
+        embedding=openai.Embedding.create(
+                model="text-embedding-ada-002",
+                input=data["embedding"],
+            )['data'][0]['embedding']
     )
+    event_record.save()
 
     return JsonResponse({
         "id": event_record.id,
         "name": event_record.name,
         "description": event_record.description,
+        "embedding": event_record.embedding,
     })
 
+@csrf_exempt
 def index(request):
     """List all event records."""
-    if  request.method != "GET":
+    if  request.method != "POST":
         return JsonResponse({'message': 'Invalid request method'}, status=405)
 
-    event_records = EventRecord.objects.all()
+    data = json.loads(request.body)
+
+    event_records = EventRecord.objects.annotate(distance=CosineDistance('embedding', openai.Embedding.create(
+                model="text-embedding-ada-002",
+                input=data["embedding"],
+            )['data'][0]['embedding']))
 
     return JsonResponse({
         "event_records": [
@@ -35,6 +50,7 @@ def index(request):
                 "id": event_record.id,
                 "name": event_record.name,
                 "description": event_record.description,
+                "similarity": event_record.distance
             }
             for event_record in event_records
         ]
